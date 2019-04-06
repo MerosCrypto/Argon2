@@ -71,7 +71,7 @@ func Argon2d*(
     iterations: uint32 = 2,
     memory: uint32 = 16,
     parallelism: uint32 = 1
-): Hash[512] =
+): Hash[384] =
     #Extract the args.
     var
         data: string = dataArg
@@ -95,7 +95,7 @@ func Argon2d*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(64)
+        uint32(48)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
 
@@ -105,7 +105,7 @@ func Argon2i*(
     iterations: uint32 = 2,
     memory: uint32 = 16,
     parallelism: uint32 = 1
-): Hash[512] =
+): Hash[384] =
     #Extract the args.
     var
         data: string = dataArg
@@ -129,7 +129,7 @@ func Argon2i*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(64)
+        uint32(48)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
 
@@ -139,12 +139,12 @@ func Argon2id*(
     iterations: uint32 = 2,
     memory: uint32 = 16,
     parallelism: uint32 = 1
-): Hash[512] =
+): Hash[384] =
     #Extract the args.
     var
         data: string = dataArg
         salt: string = saltArg
-        
+
     #Make sure the data exists.
     if data == "":
         data = $char(0)
@@ -163,6 +163,6 @@ func Argon2id*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(64)
+        uint32(48)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
