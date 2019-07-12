@@ -11,12 +11,12 @@ const currentFolder = currentSourcePath().substr(0, currentSourcePath().len - 11
 {.passC: "-I" & currentFolder & "Argon2/src".}
 {.passC: "-I" & currentFolder & "Argon2/src/blake2".}
 #Compile the relevant C files.
-{.compile: "" & currentFolder & "Argon2/src/core.c".}
-{.compile: "" & currentFolder & "Argon2/src/thread.c".}
-{.compile: "" & currentFolder & "Argon2/src/encoding.c".}
-{.compile: "" & currentFolder & "Argon2/src/blake2/blake2b.c".}
-{.compile: "" & currentFolder & "Argon2/src/ref.c".}
-{.compile: "" & currentFolder & "Argon2/src/argon2.c".}
+{.compile: currentFolder & "Argon2/src/core.c".}
+{.compile: currentFolder & "Argon2/src/thread.c".}
+{.compile: currentFolder & "Argon2/src/encoding.c".}
+{.compile: currentFolder & "Argon2/src/blake2/blake2b.c".}
+{.compile: currentFolder & "Argon2/src/ref.c".}
+{.compile: currentFolder & "Argon2/src/argon2.c".}
 
 #C functions.
 func cArgon2d(
@@ -68,9 +68,9 @@ func cArgon2id(
 func Argon2d*(
     dataArg: string,
     saltArg: string,
-    iterations: uint32 = 2,
-    memory: uint32 = 16,
-    parallelism: uint32 = 1
+    iterations: uint32,
+    memory: uint32,
+    parallelism: uint32
 ): Hash[384] =
     #Extract the args.
     var
@@ -102,9 +102,9 @@ func Argon2d*(
 func Argon2i*(
     dataArg: string,
     saltArg: string,
-    iterations: uint32 = 2,
-    memory: uint32 = 16,
-    parallelism: uint32 = 1
+    iterations: uint32,
+    memory: uint32,
+    parallelism: uint32
 ): Hash[384] =
     #Extract the args.
     var
@@ -136,9 +136,9 @@ func Argon2i*(
 func Argon2id*(
     dataArg: string,
     saltArg: string,
-    iterations: uint32 = 2,
-    memory: uint32 = 16,
-    parallelism: uint32 = 1
+    iterations: uint32,
+    memory: uint32,
+    parallelism: uint32
 ): Hash[384] =
     #Extract the args.
     var

@@ -1,4 +1,4 @@
-version     = "1.0.0"
+version     = "1.0.1"
 author      = "Luke Parker"
 description = "A Nim Wrapper for the Argon2 algorithm."
 license     = "MIT"
