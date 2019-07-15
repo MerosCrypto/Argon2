@@ -31,7 +31,7 @@ func cArgon2d(
     resLen: uint32
 ): cint {.
     header: "argon2.h",
-    importc: "argon2id_hash_raw"
+    importc: "argon2d_hash_raw"
 .}
 
 func cArgon2i(
@@ -61,7 +61,7 @@ func cArgon2id(
     resLen: uint32
 ): cint {.
     header: "argon2.h",
-    importc: "argon2d_hash_raw"
+    importc: "argon2id_hash_raw"
 .}
 
 #Take in data and a salt; return a Hash.
@@ -84,12 +84,10 @@ func Argon2d*(
     while salt.len < 8:
         salt = char(0) & salt
 
-    #The iteration quantity and memory usage values are for testing only.
-    #They are not final and will be changed.
     if cArgon2d(
         iterations,
         memory,
-        uint32(1),
+        parallelism,
         cast[ptr uint8](addr data[0]),
         uint32(data.len),
         cast[ptr uint8](addr salt[0]),
@@ -118,12 +116,10 @@ func Argon2i*(
     while salt.len < 8:
         salt = char(0) & salt
 
-    #The iteration quantity and memory usage values are for testing only.
-    #They are not final and will be changed.
     if cArgon2i(
         iterations,
         memory,
-        uint32(1),
+        parallelism,
         cast[ptr uint8](addr data[0]),
         uint32(data.len),
         cast[ptr uint8](addr salt[0]),
@@ -152,12 +148,10 @@ func Argon2id*(
     while salt.len < 8:
         salt = char(0) & salt
 
-    #The iteration quantity and memory usage values are for testing only.
-    #They are not final and will be changed.
     if cArgon2id(
         iterations,
         memory,
-        uint32(1),
+        parallelism,
         cast[ptr uint8](addr data[0]),
         uint32(data.len),
         cast[ptr uint8](addr salt[0]),
