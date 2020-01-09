@@ -1,22 +1,18 @@
 #Wrapper for the Argon2 C library that won the PHC competition.
 
+#Get the current folder.
+const currentFolder: string = currentSourcePath().substr(0, currentSourcePath().len - 11)
+
+#Include the header.
+{.passC: "-I" & currentFolder & "phc-winner-argon2/include".}
+
+#Link against Argon2.
+{.passL: "-L" & currentFolder & "phc-winner-argon2/".}
+{.passL: "-largon2".}
+
 #Define the Hash Type.
 type Hash*[bits: static[int]] = object
     data*: array[bits div 8, uint8]
-
-#Get the current folder.
-const currentFolder = currentSourcePath().substr(0, currentSourcePath().len - 11)
-#Include the headers.
-{.passC: "-I" & currentFolder & "Argon2/include".}
-{.passC: "-I" & currentFolder & "Argon2/src".}
-{.passC: "-I" & currentFolder & "Argon2/src/blake2".}
-#Compile the relevant C files.
-{.compile: currentFolder & "Argon2/src/core.c".}
-{.compile: currentFolder & "Argon2/src/thread.c".}
-{.compile: currentFolder & "Argon2/src/encoding.c".}
-{.compile: currentFolder & "Argon2/src/blake2/blake2b.c".}
-{.compile: currentFolder & "Argon2/src/ref.c".}
-{.compile: currentFolder & "Argon2/src/argon2.c".}
 
 #C functions.
 func cArgon2d(

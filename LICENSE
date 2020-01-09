@@ -1,10 +1,6 @@
-The bundled Argon2 source files are under the CC0 1.0 Universal License or the Apache 2.0 License, copyright (2015) Daniel Dinu, Dmitry Khovratovich, Jean-Philippe Aumasson, and Samuel Neves. Please see the `Argon2` folder for the full `LICENSE` text.
-
-The Nim Wrapper around this Argon2 library is released under the following license:
-
 The MIT License (MIT)
 
-Copyright (c) 2018-2019 Luke Parker
+Copyright (c) 2018-2020 Luke Parker
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
