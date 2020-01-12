@@ -1,6 +1,6 @@
 import os
 
-version     = "1.1.1"
+version     = "1.1.2"
 author      = "Luke Parker"
 description = "A Nim Wrapper for the Argon2 algorithm."
 license     = "MIT"

@@ -14,8 +14,8 @@ const currentFolder: string = currentSourcePath().substr(0, currentSourcePath().
 type Hash*[bits: static[int]] = object
     data*: array[bits div 8, uint8]
 
-#C functions.
-func cArgon2d(
+#C proctions.
+proc cArgon2d(
     iterations: uint32,
     memory: uint32,
     parallelism: uint32,
@@ -30,7 +30,7 @@ func cArgon2d(
     importc: "argon2d_hash_raw"
 .}
 
-func cArgon2i(
+proc cArgon2i(
     iterations: uint32,
     memory: uint32,
     parallelism: uint32,
@@ -45,7 +45,7 @@ func cArgon2i(
     importc: "argon2i_hash_raw"
 .}
 
-func cArgon2id(
+proc cArgon2id(
     iterations: uint32,
     memory: uint32,
     parallelism: uint32,
@@ -61,13 +61,13 @@ func cArgon2id(
 .}
 
 #Take in data and a salt; return a Hash.
-func Argon2d*(
+proc Argon2d*(
     dataArg: string,
     saltArg: string,
     iterations: uint32,
     memory: uint32,
     parallelism: uint32
-): Hash[384] =
+): Hash[256] =
     #Extract the args.
     var
         data: string = dataArg
@@ -89,17 +89,17 @@ func Argon2d*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(48)
+        uint32(32)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
 
-func Argon2i*(
+proc Argon2i*(
     dataArg: string,
     saltArg: string,
     iterations: uint32,
     memory: uint32,
     parallelism: uint32
-): Hash[384] =
+): Hash[256] =
     #Extract the args.
     var
         data: string = dataArg
@@ -121,17 +121,17 @@ func Argon2i*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(48)
+        uint32(32)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
 
-func Argon2id*(
+proc Argon2id*(
     dataArg: string,
     saltArg: string,
     iterations: uint32,
     memory: uint32,
     parallelism: uint32
-): Hash[384] =
+): Hash[256] =
     #Extract the args.
     var
         data: string = dataArg
@@ -153,6 +153,6 @@ func Argon2id*(
         cast[ptr uint8](addr salt[0]),
         uint32(salt.len),
         addr result.data[0],
-        uint32(48)
+        uint32(32)
     ) != 0:
         raise newException(Exception, "Argon2 raised an error.")
