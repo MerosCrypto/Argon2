@@ -30,4 +30,4 @@ before install:
         exec gitExe & " submodule update --init --recursive"
 
     withDir projectDir() / "phc-winner-argon2":
-        exec makeExe
+        exec makeExe & " OPTTARGET=x86-64"
