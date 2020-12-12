@@ -1,6 +1,6 @@
 import os
 
-version     = "1.1.2"
+version     = "1.1.3"
 author      = "Luke Parker"
 description = "A Nim Wrapper for the Argon2 algorithm."
 license     = "MIT"
@@ -30,4 +30,4 @@ before install:
         exec gitExe & " submodule update --init --recursive"
 
     withDir projectDir() / "phc-winner-argon2":
-        exec makeExe & " OPTTARGET=x86-64"
+        exec makeExe
